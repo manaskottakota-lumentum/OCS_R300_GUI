@@ -5,6 +5,7 @@ import { Sidebar } from "./components/Sidebar.jsx";
 import { TopBar } from "./components/TopBar.jsx";
 import { Toast } from "./components/Toast.jsx";
 import { useOcsDashboard } from "./hooks/useOcsDashboard.js";
+import { OnboardingPanel, TroubleshootingPanel, WorkflowPanel } from "./components/WorkflowPanel.jsx";
 
 export default function App() {
   const { state: appState, snapshot, toast, patch, actions } = useOcsDashboard();
@@ -126,6 +127,11 @@ export default function App() {
             </button>
           </div>
         )}
+        <div className="lower-grid mt-3 grid grid-cols-[minmax(620px,1fr)_280px_330px] gap-3">
+          <WorkflowPanel state={appState} patch={patch} />
+          <OnboardingPanel state={appState} patch={patch} />
+          <TroubleshootingPanel />
+        </div>
       </main>
       <Toast toast={toast} />
     </div>
