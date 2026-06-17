@@ -1,5 +1,6 @@
 import { portNumber } from "./ocsModel.js";
 import { InspectorPanel } from "./components/InspectorPanel.jsx";
+import { Icon } from "./components/Icon.jsx";
 import { MatrixPanel } from "./components/MatrixPanel.jsx";
 import { Sidebar } from "./components/Sidebar.jsx";
 import { TopBar } from "./components/TopBar.jsx";
@@ -40,30 +41,30 @@ export default function App() {
                 if (number >= 1 && number <= 300) patch({ centerPort: number });
               }}
             />
-            <i className="ti ti-search text-xl text-slate-700" />
+            <Icon name="search" className="text-slate-700" size={20} />
           </div>
           <button className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-300 bg-white px-4 text-sm font-bold shadow-sm hover:bg-slate-50">
-            <i className="ti ti-filter text-lg" />
+            <Icon name="filter" size={18} />
             Filters
-            <i className="ti ti-chevron-down" />
+            <Icon name="chevronDown" size={16} />
           </button>
         </section>
 
         <section className="mb-3 flex flex-wrap overflow-hidden rounded-md border border-slate-300 bg-white shadow-sm">
           {[
-            ["ti-refresh", "Get", actions.getConnections],
-            ["ti-plus", "Create", actions.createConnection],
-            ["ti-pencil", "Update", actions.updateSelectedConnection],
-            ["ti-switch-3", "Replace", actions.replaceDraft],
-            ["ti-trash", "Delete", actions.deleteSelected],
-            ["ti-ban", "Block", actions.blockSelected],
-            ["ti-circle-off", "Unblock", actions.unblockSelected],
-            ["ti-circle-check", "Validate", actions.validatePlan],
-            ["ti-player-play", "Dry Run", actions.dryRun],
+            ["refresh", "Get", actions.getConnections],
+            ["plus", "Create", actions.createConnection],
+            ["pencil", "Update", actions.updateSelectedConnection],
+            ["switch", "Replace", actions.replaceDraft],
+            ["trash", "Delete", actions.deleteSelected],
+            ["ban", "Block", actions.blockSelected],
+            ["circleOff", "Unblock", actions.unblockSelected],
+            ["circleCheck", "Validate", actions.validatePlan],
+            ["play", "Dry Run", actions.dryRun],
           ].map(([icon, label, onClick]) => (
             <button key={label} className="toolbar-button" onClick={onClick}>
               <span>
-                <i className={`ti ${icon}`} />
+                <Icon name={icon} className="mx-auto mb-1" size={20} />
                 {label}
               </span>
             </button>
@@ -72,20 +73,20 @@ export default function App() {
             className="m-2 inline-flex h-[38px] min-w-[118px] items-center justify-center gap-2 rounded-md bg-blue-600 px-4 text-sm font-black text-white shadow-sm hover:bg-blue-700"
             onClick={actions.applyChanges}
           >
-            <i className="ti ti-check text-xl" />
+            <Icon name="check" size={20} />
             Apply
           </button>
           <div className="mx-2 my-2 w-px border-l border-dashed border-slate-300" />
           {[
-            ["ti-folder", "Import", actions.getConnections],
-            ["ti-upload", "Export", () => window.alert("Export will move to backend/download handling later.")],
-            ["ti-device-floppy", "Save Profile", actions.saveProfile],
-            ["ti-folder-up", "Load Profile", actions.loadProfile],
-            ["ti-history", "Rollback", actions.rollback],
+            ["folder", "Import", actions.getConnections],
+            ["upload", "Export", () => window.alert("Export will move to backend/download handling later.")],
+            ["save", "Save Profile", actions.saveProfile],
+            ["folderUp", "Load Profile", actions.loadProfile],
+            ["history", "Rollback", actions.rollback],
           ].map(([icon, label, onClick]) => (
             <button key={label} className="toolbar-button" onClick={onClick}>
               <span>
-                <i className={`ti ${icon}`} />
+                <Icon name={icon} className="mx-auto mb-1" size={20} />
                 {label}
               </span>
             </button>
@@ -115,14 +116,14 @@ export default function App() {
         </div>
         {appState.dryRun.passed && (
           <div className="mx-4 mt-3 flex items-center gap-3 rounded-md border border-green-300 bg-green-50 px-4 py-3">
-            <i className="ti ti-circle-check-filled text-2xl text-green-600" />
+            <Icon name="circleCheckFilled" className="text-green-600" size={24} />
             <div className="mr-auto text-base font-black">Dry run passed: {appState.dryRun.count} changes ready to apply</div>
             <button className="inline-flex h-9 items-center gap-2 rounded-md bg-blue-600 px-5 text-sm font-bold text-white hover:bg-blue-700" onClick={actions.applyChanges}>
-              <i className="ti ti-check" />
+              <Icon name="check" size={18} />
               Apply
             </button>
             <button className="inline-flex h-9 items-center gap-2 rounded-md border border-slate-300 bg-white px-5 text-sm font-bold hover:bg-slate-50" onClick={() => patch({ dryRun: { passed: false, count: 0 } })}>
-              <i className="ti ti-x" />
+              <Icon name="x" size={18} />
               Cancel
             </button>
           </div>

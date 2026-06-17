@@ -1,8 +1,10 @@
+import { Icon } from "./Icon.jsx";
+
 export function TopBar({ state, onChange }) {
   return (
     <header className="topbar flex items-center gap-3 px-4">
       <button className="h-10 w-10 rounded-md hover:bg-slate-100" title="Toggle navigation">
-        <i className="ti ti-menu-2 text-2xl" />
+        <Icon name="menu" size={24} />
       </button>
 
       <div className="min-w-[190px]">
@@ -35,7 +37,7 @@ export function TopBar({ state, onChange }) {
           <span>{state.connected ? "Connected" : "Disconnected"}</span>
         </button>
         <div className="flex h-12 items-center gap-2 border-r border-slate-200 px-4 text-sm font-semibold">
-          <i className="ti ti-lock-filled text-lg text-green-600" />
+          <Icon name="lock" className="text-green-600" size={18} />
           <span>{state.mtls ? "mTLS Enabled" : "mTLS Disabled"}</span>
         </div>
         <div className="flex h-12 items-center gap-2 px-4 text-sm">
@@ -54,17 +56,17 @@ export function TopBar({ state, onChange }) {
 
       <div className="ml-auto flex items-center gap-1">
         <div className="hidden h-10 items-center gap-2 border-r border-slate-200 px-4 text-sm font-bold lg:flex">
-          <i className="ti ti-shield-check text-lg" />
+          <Icon name="shieldCheck" size={18} />
           Audit: <span>{state.auditEnabled ? "Enabled" : "Disabled"}</span>
         </div>
         <button className="relative h-10 w-10 rounded-md hover:bg-slate-100" title="Notifications">
-          <i className="ti ti-bell text-2xl" />
+          <Icon name="bell" size={24} />
           <span className="absolute right-1.5 top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs font-bold text-white">
             3
           </span>
         </button>
         <button className="h-10 w-10 rounded-md hover:bg-slate-100" title="User profile">
-          <i className="ti ti-user-circle text-2xl" />
+          <Icon name="userCircle" size={24} />
         </button>
       </div>
     </header>

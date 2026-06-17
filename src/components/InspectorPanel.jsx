@@ -1,4 +1,5 @@
 import { STATUS_LABELS, hvdac, statusForPort, validateSnapshot } from "../ocsModel.js";
+import { Icon } from "./Icon.jsx";
 
 function SelectedBadge({ status }) {
   return <span className={`badge ${status}`}>{STATUS_LABELS[status] || status}</span>;
@@ -57,7 +58,7 @@ export function InspectorPanel({
       <div className="flex items-center border-b border-slate-300 px-4 py-3">
         <h2 className="mr-auto text-base font-black">Selected Connection</h2>
         <button title="Collapse inspector">
-          <i className="ti ti-chevron-up text-xl" />
+          <Icon name="chevronUp" size={20} />
         </button>
       </div>
 
@@ -95,7 +96,7 @@ export function InspectorPanel({
           </div>
           {errors.length ? (
             <div className="flex items-start gap-2 text-red-700">
-              <i className="ti ti-alert-circle text-lg" />
+              <Icon name="alertCircle" size={18} />
               <div>
                 <div className="font-bold">
                   {errors.length} error{errors.length === 1 ? "" : "s"} found
@@ -105,7 +106,7 @@ export function InspectorPanel({
             </div>
           ) : (
             <div className="flex items-start gap-2 text-green-700">
-              <i className="ti ti-circle-check text-lg" />
+              <Icon name="circleCheck" size={18} />
               <div>
                 <div className="font-bold">Valid</div>
                 <div className="text-xs text-slate-600">No errors found</div>
@@ -126,7 +127,7 @@ export function InspectorPanel({
               ))}
             </select>
             <button className="h-9 rounded border border-blue-400 text-blue-700 hover:bg-blue-50" title="Save profile" onClick={onSaveProfile}>
-              <i className="ti ti-device-floppy text-xl" />
+              <Icon name="save" size={20} />
             </button>
             <label htmlFor="rollbackSelect">Rollback Target:</label>
             <select id="rollbackSelect" className="h-9 rounded border border-slate-300 bg-white px-3">
@@ -135,7 +136,7 @@ export function InspectorPanel({
               <option>Previous Draft</option>
             </select>
             <button className="h-9 rounded border border-blue-400 text-blue-700 hover:bg-blue-50" title="Load selected profile" onClick={onLoadProfile}>
-              <i className="ti ti-folder-up text-xl" />
+              <Icon name="folderUp" size={20} />
             </button>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -143,10 +144,10 @@ export function InspectorPanel({
               className="h-10 rounded-md border border-blue-500 bg-white text-sm font-bold text-blue-700 hover:bg-blue-50"
               onClick={onPreviewRollback}
             >
-              <i className="ti ti-rotate-clockwise" /> Preview Rollback
+              <Icon name="rollbackPreview" size={16} /> Preview Rollback
             </button>
             <button className="h-10 rounded-md bg-red-500 text-sm font-black text-white hover:bg-red-600" onClick={onRollback}>
-              <i className="ti ti-history" /> Rollback
+              <Icon name="history" size={16} /> Rollback
             </button>
           </div>
         </div>
@@ -156,7 +157,7 @@ export function InspectorPanel({
           <div className="flex items-center gap-2">
             <code className="min-w-0 flex-1 truncate rounded bg-slate-50 px-1.5 py-1">{connection.id}</code>
             <button className="h-8 w-8 rounded border border-slate-300 hover:bg-slate-50" title="Copy UUID">
-              <i className="ti ti-copy" />
+              <Icon name="copy" size={16} />
             </button>
           </div>
         </div>

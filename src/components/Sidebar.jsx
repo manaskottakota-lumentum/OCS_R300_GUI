@@ -1,11 +1,13 @@
+import { Icon } from "./Icon.jsx";
+
 const NAV_ITEMS = [
-  ["ti-home", "Dashboard"],
-  ["ti-topology-star-3", "Matrix"],
-  ["ti-server-2", "Ports"],
-  ["ti-shield-cog", "Provisioning"],
-  ["ti-chart-bar", "Telemetry"],
-  ["ti-user-cog", "Admin"],
-  ["ti-file-text", "Docs"],
+  ["home", "Dashboard"],
+  ["matrix", "Matrix"],
+  ["ports", "Ports"],
+  ["provisioning", "Provisioning"],
+  ["telemetry", "Telemetry"],
+  ["userCog", "Admin"],
+  ["fileText", "Docs"],
 ];
 
 export function Sidebar() {
@@ -14,7 +16,7 @@ export function Sidebar() {
       <nav className="space-y-1">
         {NAV_ITEMS.map(([icon, label]) => (
           <div key={label} className={`nav-item ${label === "Matrix" ? "active" : ""}`}>
-            <i className={`ti ${icon} text-2xl`} />
+            <Icon name={icon} size={24} />
             <span className="nav-label">{label}</span>
           </div>
         ))}
@@ -42,11 +44,11 @@ export function Sidebar() {
         </dl>
         <div className="mt-4 border-t border-slate-200 pt-3">
           <button className="mb-2 flex w-full items-center gap-2 rounded px-1 py-1 font-bold text-blue-700 hover:bg-blue-50">
-            <i className="ti ti-download" />
+            <Icon name="download" size={16} />
             Support Bundle
           </button>
           <button className="flex w-full items-center gap-2 rounded px-1 py-1 font-bold text-blue-700 hover:bg-blue-50">
-            <i className="ti ti-refresh" />
+            <Icon name="refresh" size={16} />
             System Reboot
           </button>
         </div>

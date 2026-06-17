@@ -6,6 +6,7 @@ import {
   statusForPort,
   visibleNumbers,
 } from "../ocsModel.js";
+import { Icon } from "./Icon.jsx";
 
 function PortRow({ port, status, selected, showLabels, onSelect }) {
   return (
@@ -123,7 +124,7 @@ export function MatrixPanel({ state, snapshot, onSelect, onCenter, onToggleLabel
         <div className="mr-auto flex items-center gap-2 text-base font-black">
           OCS Cross-Connect Matrix
           <button className="text-slate-500" title="Matrix information">
-            <i className="ti ti-info-circle" />
+            <Icon name="info" size={16} />
           </button>
         </div>
         <select className="h-9 rounded border border-slate-300 bg-white px-3 text-sm" defaultValue="Auto Layout">
@@ -139,15 +140,15 @@ export function MatrixPanel({ state, snapshot, onSelect, onCenter, onToggleLabel
           <span className="text-xs font-bold">Zoom</span>
           <div className="inline-flex overflow-hidden rounded-md border border-slate-300">
             <button className="h-9 w-10 hover:bg-slate-50" onClick={() => onZoom(Math.max(70, state.zoom - 10))}>
-              <i className="ti ti-minus" />
+              <Icon name="minus" size={18} />
             </button>
             <div className="flex h-9 w-16 items-center justify-center border-x border-slate-300 text-sm">{state.zoom}%</div>
             <button className="h-9 w-10 hover:bg-slate-50" onClick={() => onZoom(Math.min(150, state.zoom + 10))}>
-              <i className="ti ti-plus" />
+              <Icon name="plus" size={18} />
             </button>
           </div>
           <button className="h-9 w-9 rounded-md border border-slate-300 hover:bg-slate-50" onClick={() => onZoom(100)}>
-            <i className="ti ti-arrows-maximize text-xl" />
+            <Icon name="arrowsMaximize" size={20} />
           </button>
         </div>
       </div>

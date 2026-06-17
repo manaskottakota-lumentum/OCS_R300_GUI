@@ -1,4 +1,5 @@
 import { TROUBLESHOOTING_CARDS, WORKFLOW_TABS } from "../ocsModel.js";
+import { Icon } from "./Icon.jsx";
 
 function MetricCard({ title, unit, values, color }) {
   const max = Math.max(...values, 1);
@@ -50,7 +51,7 @@ function AuditTable({ logs }) {
               <td className="py-2 pr-4">{row.time}</td>
               <td className="py-2 pr-4">{row.user}</td>
               <td className="py-2 pr-4">
-                <i className="ti ti-activity" /> {row.action}
+                <Icon name="activity" className="inline" size={14} /> {row.action}
               </td>
               <td className="py-2 pr-4">{row.target}</td>
               <td className="py-2 pr-4">{row.details}</td>
@@ -120,7 +121,7 @@ function TabContent({ state, patch }) {
     return (
       <div className="rounded-md border border-slate-300 p-4">
         <div className="mb-3 flex items-center gap-2 text-lg font-black">
-          <i className="ti ti-lock-check text-green-600" /> Certificate / mTLS Management
+          <Icon name="lockCheck" className="text-green-600" size={20} /> Certificate / mTLS Management
         </div>
         <dl className="grid gap-3 text-sm md:grid-cols-2">
           <div>
@@ -271,7 +272,7 @@ export function OnboardingPanel({ state, patch }) {
         ))}
       </div>
       <button className="mt-4 h-10 w-full rounded-md border border-blue-500 text-sm font-bold text-blue-700 hover:bg-blue-50">
-        <i className="ti ti-book-2" /> View Full Guide
+        <Icon name="book" className="inline" size={16} /> View Full Guide
       </button>
     </aside>
   );
@@ -289,7 +290,7 @@ export function TroubleshootingPanel() {
             return (
               <button key={card.title} className={`w-full rounded-md border ${color} p-3 text-left hover:brightness-[0.98]`}>
                 <div className="flex gap-2">
-                  <i className={`ti ${card.icon} mt-0.5 text-lg`} />
+                  <Icon name={card.severity === "error" ? "alertCircle" : "alertTriangle"} className="mt-0.5" size={18} />
                   <div>
                     <div className="text-sm font-black">{card.title}</div>
                     <div className="mt-1 text-xs text-slate-700">{card.detail}</div>
@@ -300,7 +301,7 @@ export function TroubleshootingPanel() {
           })}
         </div>
         <button className="mt-4 h-10 w-full rounded-md border border-blue-500 text-sm font-bold text-blue-700 hover:bg-blue-50">
-          <i className="ti ti-tool" /> View All Diagnostics
+          <Icon name="tool" className="inline" size={16} /> View All Diagnostics
         </button>
       </div>
     </aside>
