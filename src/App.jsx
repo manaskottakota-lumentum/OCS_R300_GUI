@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { createInitialAppState, portNumber } from "./ocsModel.js";
+import { InspectorPanel } from "./components/InspectorPanel.jsx";
 import { MatrixPanel } from "./components/MatrixPanel.jsx";
 import { Sidebar } from "./components/Sidebar.jsx";
 import { TopBar } from "./components/TopBar.jsx";
@@ -103,12 +104,28 @@ export default function App() {
             onToggleMinimap={(event) => updateState({ minimap: event.target.checked })}
             onZoom={(zoom) => updateState({ zoom })}
           />
-          <aside className="module rounded-md p-6">
-            <h2 className="text-lg font-black">Selected Connection</h2>
-            <p className="mt-2 text-sm text-slate-600">
-              Inspector panel will be ported next for {appState.selected.a} to {appState.selected.b}.
-            </p>
-          </aside>
+          <InspectorPanel
+            state={appState}
+            snapshot={snapshot}
+            onUpdateSelectedLabel={(label) =>
+              updateState({
+                draft: {
+                  ...appState.draft,
+                  connections: appState.draft.connections.map((connection) =>
+                    connection.a === appState.selected.a || connection.b === appState.selected.b
+                      ? { ...connection, label, updatedAt: new Date().toISOString() }
+                      : connection,
+                  ),
+                },
+                mode: "draft",
+              })
+            }
+            onSaveProfile={() => window.alert("Profile save will be wired in the actions commit.")}
+            onLoadProfile={() => window.alert("Profile load will be wired in the actions commit.")}
+            onRollback={() => window.alert("Rollback will be wired in the actions commit.")}
+            onPreviewRollback={() => window.alert("Rollback preview will be wired in the actions commit.")}
+            onShowValidation={() => window.alert("Validation details will be wired in the actions commit.")}
+          />
         </div>
       </main>
     </div>
