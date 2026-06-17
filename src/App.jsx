@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { createInitialAppState } from "./ocsModel.js";
+import { createInitialAppState, portNumber } from "./ocsModel.js";
+import { MatrixPanel } from "./components/MatrixPanel.jsx";
 import { Sidebar } from "./components/Sidebar.jsx";
 import { TopBar } from "./components/TopBar.jsx";
 
@@ -10,6 +11,8 @@ export default function App() {
   const updateState = (patch) => {
     setAppState((current) => ({ ...current, ...patch }));
   };
+
+  const snapshot = appState.mode === "live" ? appState.live : appState.draft;
 
   return (
     <div className="app-shell">
@@ -36,6 +39,10 @@ export default function App() {
             <input
               className="h-10 min-w-0 flex-1 text-sm outline-none"
               placeholder="Search ports (A-1, B-1, label...)"
+              onChange={(event) => {
+                const number = portNumber(event.target.value);
+                if (number >= 1 && number <= 300) updateState({ centerPort: number });
+              }}
             />
             <i className="ti ti-search text-xl text-slate-700" />
           </div>
@@ -86,11 +93,22 @@ export default function App() {
           ))}
         </section>
 
-        <div className="module rounded-md p-6">
-          <h1 className="text-xl font-black">React dashboard shell ready</h1>
-          <p className="mt-2 text-sm text-slate-600">
-            Matrix, inspector, workflows, and handlers will be ported into components next.
-          </p>
+        <div className="content-grid grid grid-cols-[minmax(690px,1fr)_420px] gap-3">
+          <MatrixPanel
+            state={appState}
+            snapshot={snapshot}
+            onSelect={(selected) => updateState({ selected })}
+            onCenter={(centerPort) => updateState({ centerPort })}
+            onToggleLabels={(event) => updateState({ showLabels: event.target.checked })}
+            onToggleMinimap={(event) => updateState({ minimap: event.target.checked })}
+            onZoom={(zoom) => updateState({ zoom })}
+          />
+          <aside className="module rounded-md p-6">
+            <h2 className="text-lg font-black">Selected Connection</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Inspector panel will be ported next for {appState.selected.a} to {appState.selected.b}.
+            </p>
+          </aside>
         </div>
       </main>
     </div>
